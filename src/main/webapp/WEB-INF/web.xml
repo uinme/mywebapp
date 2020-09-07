@@ -14,5 +14,6 @@
     <servlet-name>frontController</servlet-name>
     <url-pattern>/index/*</url-pattern>
     <url-pattern>/session/*</url-pattern>
+    <url-pattern>/user/*</url-pattern>
   </servlet-mapping>
 </web-app>
