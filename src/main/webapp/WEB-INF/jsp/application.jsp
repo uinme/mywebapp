@@ -6,6 +6,7 @@
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="model.*"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -25,6 +26,12 @@
       <ul class="navbar-nav mr-auto">
         
       </ul>
+
+      <% if (session.getAttribute("user") != null) { %>
+        <span class="navbar-text">
+          ${sessionScope.user.email}
+        </span>
+      <% } %>
       
       <ul class="navbar-nav">
         <li class="navbar-item">
