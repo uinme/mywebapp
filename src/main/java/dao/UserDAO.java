@@ -53,6 +53,7 @@ public class UserDAO extends DAO {
         user = new UserModel();
         user.setId(result.getInt("id"));
         user.setUsername(result.getString("username"));
+        user.setEmail(result.getString("email"));
         user.setCreatedAt(result.getTimestamp("created_at"));
         user.setUpdatedAt(result.getTimestamp("updated_at"));
       }
