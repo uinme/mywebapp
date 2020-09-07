@@ -4,6 +4,8 @@
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <%@ page import="javax.servlet.http.HttpServletResponse"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -16,7 +18,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a href="index" class="navbar-brand">
+      <a href="${pageContext.request.contextPath}/index" class="navbar-brand">
         Basic Webapp
       </a>
 
@@ -29,7 +31,7 @@
           <% if (session.getAttribute("user") != null) { %>
             <a href="${pageContext.request.contextPath}/session/delete" class="btn btn-light">ログアウト</a>
           <% } else { %>
-            <a href="#" class="btn btn-success">新規登録</a>
+            <a href="${pageContext.request.contextPath}/user/new" class="btn btn-success">新規登録</a>
             <a href="${pageContext.request.contextPath}/session/new" class="btn btn-success">ログイン</a>
           <% } %>
         </li>
@@ -38,7 +40,11 @@
     
     <% if (request.getAttribute("alert") != null) { %>
       <div class="alert alert-danger" role="alert">
-        ${requestScope.alert}
+        <ul>
+        <% for (String message : (List<String>)request.getAttribute("alert")) { %>
+          <li><%= message %></li>
+        <% } %>
+        </ul>
       </div>
       <% request.removeAttribute("alert"); %>
     <% } %>
