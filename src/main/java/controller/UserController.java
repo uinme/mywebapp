@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import dao.UserDAO;
 import model.UserModel;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class UserController extends Controller {
 
     public UserController(ServletContext context, HttpServletRequest request, HttpServletResponse response) {
@@ -86,7 +88,7 @@ public class UserController extends Controller {
         }
         
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-        dao.createUser(email, password, createdAt, createdAt);
+        dao.createUser(email, createHash(password), createdAt, createdAt);
 
         response.sendRedirect(request.getContextPath() + "/index");
     }
@@ -103,4 +105,13 @@ public class UserController extends Controller {
 
     }
     
+    private String createHash(String password) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        return bcrypt.encode(password);
+    }
+
+    private boolean authenticate(String password, String encryptedPassword) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        return bcrypt.matches(password, encryptedPassword);
+    }
 }

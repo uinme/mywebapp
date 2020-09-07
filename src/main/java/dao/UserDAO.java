@@ -25,6 +25,7 @@ public class UserDAO extends DAO {
         user.setId(result.getInt("id"));
         user.setUsername(result.getString("username"));
         user.setEmail(result.getString("email"));
+        user.setEncrypedPassword(result.getString("encrypted_password"));
         user.setCreatedAt(result.getTimestamp("created_at"));
         user.setUpdatedAt(result.getTimestamp("updated_at"));
       }
@@ -54,6 +55,7 @@ public class UserDAO extends DAO {
         user.setId(result.getInt("id"));
         user.setUsername(result.getString("username"));
         user.setEmail(result.getString("email"));
+        user.setEncrypedPassword(result.getString("encrypted_password"));
         user.setCreatedAt(result.getTimestamp("created_at"));
         user.setUpdatedAt(result.getTimestamp("updated_at"));
       }
