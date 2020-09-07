@@ -49,6 +49,28 @@ public class SessionController extends Controller {
     String email = request.getParameter("email");
     String password = request.getParameter("password");
 
+    if (request.getParameter("guest").equals("true")) {
+      guestLoggin();
+    } else {
+      loggin(email, password);
+    }
+
+  }
+
+  @Override
+  public void updateAction() throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void deleteAction() throws Exception {
+    HttpSession session = request.getSession();
+    session.removeAttribute("user");
+    response.sendRedirect(request.getContextPath() + "/index");
+  }
+
+  private void loggin(String email, String password) throws Exception {
     UserModel user = null;
 
     BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -68,17 +90,8 @@ public class SessionController extends Controller {
     }
   }
 
-  @Override
-  public void updateAction() throws Exception {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void deleteAction() throws Exception {
-    HttpSession session = request.getSession();
-    session.removeAttribute("user");
-    response.sendRedirect(request.getContextPath() + "/index");
+  private void guestLoggin() throws Exception {
+    loggin("guest@example.com", "guest");
   }
   
 }

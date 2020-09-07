@@ -40,6 +40,7 @@
           <% } else { %>
             <a href="${pageContext.request.contextPath}/user/new" class="btn btn-success">新規登録</a>
             <a href="${pageContext.request.contextPath}/session/new" class="btn btn-success">ログイン</a>
+            <a href="${pageContext.request.contextPath}/session/create?guest=true" class="btn btn-secondary">ゲストログイン</a>
           <% } %>
         </li>
       </ul>
