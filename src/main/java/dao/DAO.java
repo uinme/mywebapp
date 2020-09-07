@@ -10,7 +10,7 @@ public class DAO {
     Connection connection = null;
     try {
       InitialContext context = new InitialContext();
-      DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/basic_webapp");
+      DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/mywebapp");
       connection = dataSource.getConnection();
     } catch (Exception e) {
       e.printStackTrace();
