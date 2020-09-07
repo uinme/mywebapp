@@ -1,10 +1,15 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import dao.UserDAO;
 import model.UserModel;
@@ -46,15 +51,18 @@ public class SessionController extends Controller {
 
     UserModel user = null;
 
+    BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
     UserDAO dao = new UserDAO();
-    user = dao.find(email, password);
+    user = dao.findByEmail(email);
 
-    if (user != null) {
+    if (user != null && bcrypt.matches(password, user.getEncryptedPassword())) {
       HttpSession session = request.getSession();
       session.setAttribute("user", user);
       response.sendRedirect(request.getContextPath() + "/index");
     } else {
-      request.setAttribute("alert", "ユーザー名またはパスワードが間違っています。");
+      List<String> messages = new ArrayList<>();
+      messages.add("ユーザー名またはパスワードが間違っています。");
+      request.setAttribute("alert", messages);
       request.setAttribute("yield", "/WEB-INF/jsp/session/new.jsp");
       request.getRequestDispatcher("/WEB-INF/jsp/application.jsp").forward(request, response);
     }
