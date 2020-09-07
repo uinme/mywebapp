@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS basic_webapp_db;
+CREATE DATABASE IF NOT EXISTS mywebapp_db;
 
-USE basic_webapp_db;
+USE mywebapp_db;
 
 CREATE TABLE IF NOT EXISTS user (
   id                 INT          NOT NULL PRIMARY KEY AUTO_INCREMENT,
