@@ -1,5 +1,6 @@
 package controller;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,6 +53,10 @@ public class SessionController extends Controller {
       HttpSession session = request.getSession();
       session.setAttribute("user", user);
       response.sendRedirect(request.getContextPath() + "/index");
+    } else {
+      request.setAttribute("alert", "ユーザー名またはパスワードが間違っています。");
+      request.setAttribute("yield", "/WEB-INF/jsp/session/new.jsp");
+      request.getRequestDispatcher("/WEB-INF/jsp/application.jsp").forward(request, response);
     }
   }
 

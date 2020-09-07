@@ -35,6 +35,13 @@
         </li>
       </ul>
     </nav>
+    
+    <% if (request.getAttribute("alert") != null) { %>
+      <div class="alert alert-danger" role="alert">
+        ${requestScope.alert}
+      </div>
+      <% request.removeAttribute("alert"); %>
+    <% } %>
   </header>
 
   <jsp:include page="${requestScope.yield}"/>
