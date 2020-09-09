@@ -16,7 +16,6 @@ public class ModelTest {
     List<String> fieldNames = user.getFieldNames();
 
     Iterator<String> expectedFieldNames = Arrays.asList(
-      "serialVersionUID",
       "id",
       "username",
       "email",
