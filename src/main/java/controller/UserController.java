@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import model.UserModel;
@@ -38,8 +39,14 @@ public class UserController extends Controller {
 
     @Override
     public void editAction() throws Exception {
-        // TODO Auto-generated method stub
-
+        HttpSession session = request.getSession();
+        
+        if (session.getAttribute("user") == null) {
+            List<String> messages = new ArrayList<>();
+            messages.add("ログインしてください");
+            alert(messages, "/WEB-INF/jsp/session/new.jsp");
+            return;
+        }
     }
 
     @Override
@@ -81,9 +88,7 @@ public class UserController extends Controller {
         }
 
         if (error) {
-            request.setAttribute("alert", messages);
-            request.setAttribute("yield", "/WEB-INF/jsp/user/new.jsp");
-            request.getRequestDispatcher("/WEB-INF/jsp/application.jsp").forward(request, response);
+            alert(messages, "/WEB-INF/jsp/user/new.jsp");
             return;
         }
         
