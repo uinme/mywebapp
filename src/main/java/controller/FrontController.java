@@ -65,7 +65,7 @@ public class FrontController extends HttpServlet {
 
       // createおよびupdate,deleteはPOSTリクエストで受けて、DBに書き込みを行うためのアクション
       // のため、jspにフォワードしない。
-      if (action.equals("index") || action.equals("show") || action.equals("new")) {
+      if (action.equals("index") || action.equals("show") || action.equals("new") || action.equals("edit")) {
         String jspPath = "/WEB-INF/jsp/" + servletPath + "/" + action + ".jsp";
 
         // 該当するアクションのjspファイルがない場合、404を返す。
