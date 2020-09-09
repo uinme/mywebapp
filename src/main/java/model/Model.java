@@ -1,8 +1,11 @@
 package model;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -17,5 +20,17 @@ public class Model implements Serializable {
     Connection connection = dataSource.getConnection();
     
     return connection;
-  }  
+  }
+
+  public List<String> getFieldNames() {
+    Class<Model> clazz = (Class<Model>) this.getClass();
+    Field fields[] =  clazz.getDeclaredFields();
+    List<String> fileldNames = new ArrayList<>();
+
+    for (int i = 0; i < fields.length; i++) {
+      fileldNames.add(fields[i].getName());
+    }
+
+    return fileldNames;
+  }
 }
