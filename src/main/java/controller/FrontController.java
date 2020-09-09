@@ -47,14 +47,17 @@ public class FrontController extends HttpServlet {
           controller.newAction();
           break;
         case "edit":
+          controller.editAction();
           break;
         case "create":
           controller.createAction();
           break;
         case "update":
           controller.updateAction();
+          break;
         case "delete":
           controller.deleteAction();
+          break;
         default:
           response.setStatus(HttpServletResponse.SC_NOT_FOUND);
           return;
