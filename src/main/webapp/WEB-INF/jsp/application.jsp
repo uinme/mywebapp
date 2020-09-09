@@ -19,7 +19,7 @@
 <body>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a href="${pageContext.request.contextPath}/index" class="navbar-brand">
+      <a href="${pageContext.request.contextPath}/index" class="navbar-brand h1">
         Basic Webapp
       </a>
 
