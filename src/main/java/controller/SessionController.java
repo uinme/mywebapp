@@ -48,9 +48,13 @@ public class SessionController extends Controller {
   public void createAction() throws Exception {
     String email = request.getParameter("email");
     String password = request.getParameter("password");
+    
+    String guest = request.getParameter("guest");
 
-    if (request.getParameter("guest").equals("true")) {
-      guestLoggin();
+    if (guest != null) {
+      if (guest.equals("true")) {
+        guestLoggin();
+      }
     } else {
       loggin(email, password);
     }
