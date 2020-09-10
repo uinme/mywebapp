@@ -100,8 +100,38 @@ public class UserController extends Controller {
 
     @Override
     public void updateAction() throws Exception {
-        // TODO Auto-generated method stub
+        HttpSession session = request.getSession();
+        UserModel user = (UserModel) session.getAttribute("user");
 
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+
+        List<String> messages = new ArrayList<>();
+
+        if (username == null && email == null) {
+            if (username.isEmpty() && username.isEmpty()) {
+                messages.add("変更する項目がありません");
+                alert(messages, "/WEB-INF/jsp/user/edit.jsp");
+                return;
+            }
+        }
+
+        if (username != null) {
+            if (!username.isEmpty()) {
+                user.setUsername(username);
+            }
+        }
+
+        if (email != null) {
+            if (!email.isEmpty()) {
+                user.setEmail(email);
+            }
+        }
+        
+        UserDAO dao = new UserDAO();
+        dao.updateUser(user);
+
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 
     @Override
