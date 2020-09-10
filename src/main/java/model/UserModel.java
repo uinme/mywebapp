@@ -2,17 +2,15 @@ package model;
 
 import java.sql.Timestamp;
 
-import annotation.SQLColumn;
-
 public class UserModel extends Model {
   private static final long serialVersionUID = 1L;
   
-  private @SQLColumn int id;
-  private @SQLColumn String username;
-  private @SQLColumn String email;
-  private @SQLColumn String encryptedPassword;
-  private @SQLColumn Timestamp createdAt;
-  private @SQLColumn Timestamp updatedAt;
+  private int id;
+  private String username;
+  private String email;
+  private String encryptedPassword;
+  private Timestamp createdAt;
+  private Timestamp updatedAt;
 
   public int getId() {
     return id;
