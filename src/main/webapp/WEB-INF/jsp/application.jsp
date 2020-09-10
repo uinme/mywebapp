@@ -36,6 +36,7 @@
       <ul class="navbar-nav">
         <li class="navbar-item">
           <% if (session.getAttribute("user") != null) { %>
+            <a href="${pageContext.request.contextPath}/user/edit" class="btn btn-success">Myページ</a>
             <a href="${pageContext.request.contextPath}/session/delete" class="btn btn-light">ログアウト</a>
           <% } else { %>
             <a href="${pageContext.request.contextPath}/user/new" class="btn btn-success">新規登録</a>
