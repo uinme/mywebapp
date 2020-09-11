@@ -21,8 +21,11 @@ public class PostController extends Controller {
 
   @Override
   public void indexAction() throws Exception {
-    // TODO Auto-generated method stub
+    PostDAO dao = new PostDAO();
 
+    List<PostModel> posts = dao.all();
+
+    request.setAttribute("posts", posts);
   }
 
   @Override
@@ -33,8 +36,7 @@ public class PostController extends Controller {
 
   @Override
   public void newAction() throws Exception {
-    // TODO Auto-generated method stub
-
+    
   }
 
   @Override

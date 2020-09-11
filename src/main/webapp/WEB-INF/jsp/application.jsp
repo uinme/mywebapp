@@ -24,7 +24,14 @@
       </a>
 
       <ul class="navbar-nav mr-auto">
-        
+        <li class="nav-item">
+          <a href="${pageContext.request.contextPath}/post/index" class="nav-link">投稿一覧</a>
+        </li>
+        <% if (session.getAttribute("user") != null) { %>
+        <li class="nav-item">
+          <a href="${pageContext.request.contextPath}/post/new" class="nav-link">投稿する</a>
+        </li>
+        <% } %>
       </ul>
 
       <% if (session.getAttribute("user") != null) { %>

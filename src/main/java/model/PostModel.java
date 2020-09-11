@@ -10,6 +10,7 @@ public class PostModel extends Model {
   private String content;
   private Timestamp createdAt;
   private Timestamp updatedAt;
+  private UserModel user;
 
   public int getId() {
     return id;
@@ -49,5 +50,13 @@ public class PostModel extends Model {
 
   public void setUpdatedAt(Timestamp updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public UserModel getUser() {
+    return user;
+  }
+
+  public void setUser(UserModel user) {
+    this.user = user;
   }
 }
