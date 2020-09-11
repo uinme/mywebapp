@@ -21,3 +21,11 @@ CREATE TABLE IF NOT EXISTS tweet (
   INDEX id_index (id)          ,
   FOREIGN KEY user_id_foreign (user_id) REFERENCES user (id)
 );
+
+CREATE TABLE IF NOT EXISTS follow (
+  id INT NOT NULL AUTO_INCREMENT,
+  follower_user_id INT NOT NULL,
+  followed_user_id INT NOT NULL,
+  INDEX id_index (id),
+  PRIMARY KEY (id)
+);
