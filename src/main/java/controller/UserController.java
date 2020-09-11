@@ -28,8 +28,18 @@ public class UserController extends Controller {
 
     @Override
     public void showAction() throws Exception {
-        // TODO Auto-generated method stub
+        int user_id = Integer.parseInt(request.getParameter("id"));
 
+        if (user_id == 0) {
+            response.sendRedirect(request.getContextPath() + "/index");
+            return;
+        }
+
+        UserDAO dao = new UserDAO();
+        UserModel user = new UserModel();
+        user = dao.findById(user_id);
+
+        request.setAttribute("user", user);
     }
 
     @Override
@@ -51,6 +61,7 @@ public class UserController extends Controller {
 
     @Override
     public void createAction() throws Exception {
+        String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String passwordConfirmation = request.getParameter("passwordConfirmation");
@@ -60,40 +71,42 @@ public class UserController extends Controller {
         UserModel user = dao.findByEmail(email);
 
         List<String> messages = new ArrayList<>();
-        boolean error = false;
+
+        if (username.isEmpty()) {
+            messages.add("ユーザー名を入力してください。");
+        }
+
+        if (dao.findByUsername(username) != null) {
+            messages.add("既に登録されているユーザー名です。");
+        }
 
         if (email.isEmpty()) {
             messages.add("Eメールアドレスを入力してください");
-            error = true;
         }
 
         if (user != null) {
             messages.add(email + "は既に登録されています");
-            error = true;
         }
 
         if (password.isEmpty()) {
             messages.add("パスワードを入力してください");
-            error = true;
         }
 
         if (passwordConfirmation.isEmpty()) {
             messages.add("確認パスワードを入力してください");
-            error = true;
         }
 
         if (!password.equals(passwordConfirmation)) {
             messages.add("パスワードと確認パスワードが一致しません");
-            error = true;
         }
 
-        if (error) {
+        if (!messages.isEmpty()) {
             alert(messages, "/WEB-INF/jsp/user/new.jsp");
             return;
         }
         
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-        dao.createUser(email, createHash(password), createdAt, createdAt);
+        dao.createUser(username, email, createHash(password), createdAt, createdAt);
 
         response.sendRedirect(request.getContextPath() + "/index");
     }
