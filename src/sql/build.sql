@@ -27,5 +27,7 @@ CREATE TABLE IF NOT EXISTS follow (
   follower_user_id INT NOT NULL,
   followed_user_id INT NOT NULL,
   INDEX id_index (id),
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (follower_user_id) REFERENCES user (id),
+  FOREIGN KEY (followed_user_id) REFERENCES user (id)
 );

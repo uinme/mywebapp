@@ -16,5 +16,6 @@
     <url-pattern>/session/*</url-pattern>
     <url-pattern>/user/*</url-pattern>
     <url-pattern>/post/*</url-pattern>
+    <url-pattern>/follow/*</url-pattern>
   </servlet-mapping>
 </web-app>
