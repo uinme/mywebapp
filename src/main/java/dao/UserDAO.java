@@ -88,6 +88,9 @@ public class UserDAO extends DAO {
       statement.setTimestamp(4, updatedAt);
       statement.executeUpdate();
       line = statement.executeUpdate();
+
+      statement.close();
+      connection.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -110,6 +113,9 @@ public class UserDAO extends DAO {
       statement.setTimestamp(5, user.getUpdatedAt());
       statement.setInt(6, user.getId());
       line = statement.executeUpdate();
+
+      statement.close();
+      connection.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
