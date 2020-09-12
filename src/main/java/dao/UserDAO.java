@@ -1,16 +1,9 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.common.base.CaseFormat;
-
-import model.Model;
 import model.UserModel;
 
 public class UserDAO extends DAO {
@@ -30,7 +23,7 @@ public class UserDAO extends DAO {
         user.setId(result.getInt("id"));
         user.setUsername(result.getString("username"));
         user.setEmail(result.getString("email"));
-        user.setEncrypedPassword(result.getString("encrypted_password"));
+        user.setEncryptedPassword(result.getString("encrypted_password"));
         user.setCreatedAt(result.getTimestamp("created_at"));
         user.setUpdatedAt(result.getTimestamp("updated_at"));
       }
@@ -60,7 +53,7 @@ public class UserDAO extends DAO {
         user.setId(r.getInt("id"));
         user.setUsername(r.getString("username"));
         user.setEmail(r.getString("email"));
-        user.setEncrypedPassword(r.getString("encrypted_password"));
+        user.setEncryptedPassword(r.getString("encrypted_password"));
         user.setCreatedAt(r.getTimestamp("created_at"));
         user.setUpdatedAt(r.getTimestamp("updated_at"));
       }
@@ -90,7 +83,7 @@ public class UserDAO extends DAO {
         user.setId(result.getInt("id"));
         user.setUsername(result.getString("username"));
         user.setEmail(result.getString("email"));
-        user.setEncrypedPassword(result.getString("encrypted_password"));
+        user.setEncryptedPassword(result.getString("encrypted_password"));
         user.setCreatedAt(result.getTimestamp("created_at"));
         user.setUpdatedAt(result.getTimestamp("updated_at"));
       }
@@ -120,7 +113,7 @@ public class UserDAO extends DAO {
         user.setId(result.getInt("id"));
         user.setUsername(result.getString("username"));
         user.setEmail(result.getString("email"));
-        user.setEncrypedPassword(result.getString("encrypted_password"));
+        user.setEncryptedPassword(result.getString("encrypted_password"));
         user.setCreatedAt(result.getTimestamp("created_at"));
         user.setUpdatedAt(result.getTimestamp("updated_at"));
       }
