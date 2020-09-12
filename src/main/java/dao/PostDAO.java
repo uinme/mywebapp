@@ -16,13 +16,16 @@ public class PostDAO extends DAO {
     int line = 0;
     try {
       PreparedStatement statement = connection.prepareStatement(
-        "INSERT INTO post VALUES (NULL, user_id = ?, content = ?, created_at = ?, updated_at = ?)"
+        "INSERT INTO tweet VALUES (NULL, ?, ?, ?, ?)"
       );
-      statement.setInt(1, post.getId());
+      statement.setInt(1, post.getUserId());
       statement.setString(2, post.getContent());
       statement.setTimestamp(3, post.getCreatedAt());
       statement.setTimestamp(4, post.getUpdatedAt());
       line = statement.executeUpdate();
+
+      statement.close();
+      connection.close();
     } catch (Exception e) {
       e.printStackTrace();
     }

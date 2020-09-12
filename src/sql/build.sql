@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS user (
   encrypted_password VARCHAR(200) NOT NULL,
   created_at         DATETIME     NOT NULL,
   updated_at         DATETIME     NOT NULL,
-  INDEX id_index (id)
+  INDEX (id)
 );
 
 CREATE TABLE IF NOT EXISTS tweet (
@@ -18,15 +18,15 @@ CREATE TABLE IF NOT EXISTS tweet (
   content    TEXT              ,
   created_at DATETIME NOT NULL ,
   updated_at DATETIME NOT NULL ,
-  INDEX id_index (id)          ,
-  FOREIGN KEY user_id_foreign (user_id) REFERENCES user (id)
+  INDEX (id)                   ,
+  FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
 CREATE TABLE IF NOT EXISTS follow (
   id INT NOT NULL AUTO_INCREMENT,
   follower_user_id INT NOT NULL,
   followed_user_id INT NOT NULL,
-  INDEX id_index (id),
+  INDEX (id),
   PRIMARY KEY (id),
   FOREIGN KEY (follower_user_id) REFERENCES user (id),
   FOREIGN KEY (followed_user_id) REFERENCES user (id)

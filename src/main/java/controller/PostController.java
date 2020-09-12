@@ -68,11 +68,12 @@ public class PostController extends Controller {
 
     UserModel user = (UserModel) object;
     PostModel post = new PostModel();
+    Timestamp now = new Timestamp(System.currentTimeMillis());
 
     post.setUserId(user.getId());
     post.setContent(content);
-    post.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-    post.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+    post.setCreatedAt(now);
+    post.setUpdatedAt(now);
 
     PostDAO dao = new PostDAO();
     dao.createPost(post);
