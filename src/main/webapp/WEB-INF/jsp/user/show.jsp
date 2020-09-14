@@ -7,7 +7,7 @@
     <% if (session.getAttribute("user") != null) { %>
         <% UserModel follower = (UserModel) session.getAttribute("user"); %>
         <% UserModel followed = (UserModel) request.getAttribute("user"); %>
-        <% if (follower.getId() != follwed.getId()) { %>
+        <% if (follower.getId() != followed.getId()) { %>
             <form action="${pageContext.request.contextPath}/follow/create" name="form" method="post">
                 <input type="hidden" name="followed_id" value="${requestScope.user.id}">
                 <button type="submit" class="btn btn-primary">フォローする</button>
