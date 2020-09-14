@@ -8,11 +8,11 @@
     <% if (request.getAttribute("users") != null) { %>
         <% for (UserModel user : (List<UserModel>) request.getAttribute("users")) { %>
             <% request.setAttribute("userId", user.getId()); %>
-        <ul>
-            <li>
-                <a href="${pageContext.request.contextPath}/user/show?id=${userId}"><%= user.getUsername() %></a>
-            </li>
-        </ul>
+            <ul>
+                <li>
+                    <a href="${pageContext.request.contextPath}/user/show?id=${userId}"><%= user.getUsername() %></a>
+                </li>
+            </ul>
         <% } %>
     <% } %>
 </div>

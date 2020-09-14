@@ -31,6 +31,9 @@
         <li class="navbar-item">
           <a href="${pageContext.request.contextPath}/post/new" class="nav-link">投稿する</a>
         </li>
+        <li class="navbar-item">
+          <a href="${pageContext.request.contextPath}/follow/index" class="nav-link">フォローしたユーザー一覧</a>
+        </li>
         <% } %>
       </ul>
 

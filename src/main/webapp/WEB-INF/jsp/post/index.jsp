@@ -3,9 +3,9 @@
 <%@ page import="java.util.List"%>
 <%@ page import="model.PostModel"%>
 
-<div class="container py-4">
-    <% for (PostModel post : (List<PostModel>)request.getAttribute("posts")) { %>
-    <div class="card" style="width: 18rem;">
+<div class="container">
+  <% for (PostModel post : (List<PostModel>)request.getAttribute("posts")) { %>
+    <div class="card mx-auto mb-3" style="width: 36rem;">
         <div class="card-body">
           <h5 class="card-title">
             <% request.setAttribute("user", post.getUser()); %>
@@ -15,9 +15,7 @@
           </h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= post.getCreatedAt().toString() %></h6>
           <p class="card-text"><%= post.getContent() %></p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
         </div>
     </div>
-    <% } %>
+  <% } %>
 </div>
