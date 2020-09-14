@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.FollowDAO;
 import dao.UserDAO;
 import model.UserModel;
 
@@ -35,9 +36,24 @@ public class UserController extends Controller {
             return;
         }
 
+        HttpSession session = request.getSession();
+        UserModel currentUser = null;
+        try {
+            currentUser = (UserModel) session.getAttribute("user");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         UserDAO dao = new UserDAO();
+        FollowDAO fdao = new FollowDAO();
         UserModel user = new UserModel();
         user = dao.findById(user_id);
+
+        if (fdao.isFollowing(currentUser.getId(), user.getId())) {
+            request.setAttribute("isFollowing", 1);
+        } else {
+            request.setAttribute("isFollowing", 0);
+        }
 
         request.setAttribute("user", user);
     }

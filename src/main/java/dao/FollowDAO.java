@@ -60,4 +60,62 @@ public class FollowDAO extends DAO {
 
         return line;
     }
+
+    public FollowModel findByFollowerIdAndFollowedId(int followerId, int followedId) {
+        Connection connection = getConnection();
+
+        FollowModel follow = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM follow WHERE follower_user_id = ? AND followed_user_id = ?"
+            );
+            statement.setInt(1, followerId);
+            statement.setInt(2, followedId);
+            ResultSet r = statement.executeQuery();
+
+            while (r.next()) {
+                follow = new FollowModel();
+                follow.setId(r.getInt("id"));
+                follow.setFollowerUserId(r.getInt("follower_user_id"));
+                follow.setFollowedUserId(r.getInt("followed_user_id"));
+            }
+
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return follow;
+    }
+
+    public int deleteFollow(FollowModel follow) {
+        Connection connection = getConnection();
+
+        int line = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM follow WHERE id = ?"
+            );
+            statement.setInt(1, follow.getId());
+            line = statement.executeUpdate();
+
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return line;
+    }
+
+    public boolean isFollowing(int followerUserId, int followedUserId) {
+        FollowModel follow = findByFollowerIdAndFollowedId(followerUserId, followedUserId);
+        
+        if (follow == null) {
+            return false;
+        }
+
+        return true;
+    }
 }

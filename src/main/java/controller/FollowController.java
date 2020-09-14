@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.FollowDAO;
+import model.FollowModel;
 import model.UserModel;
 
 public class FollowController extends Controller {
@@ -95,7 +96,30 @@ public class FollowController extends Controller {
 
     @Override
     public void deleteAction() throws Exception {
+        HttpSession session = request.getSession();
+        Object object = session.getAttribute("user");
+        int deletingUserId = Integer.parseInt(request.getParameter("followed_id"));
 
+        List<String> messages = new ArrayList<>();
+        if (object == null) {
+            messages.add("ログインしてください");
+        }
+
+        if (!messages.isEmpty()) {
+            alert(messages, "/WEB-INF/jsp/index/index.jsp");
+            return;
+        }
+
+        UserModel currentUser = (UserModel) object;
+        int currentUserId = currentUser.getId();
+
+        FollowDAO dao = new FollowDAO();
+
+        FollowModel follow = dao.findByFollowerIdAndFollowedId(currentUserId, deletingUserId);
+
+        dao.deleteFollow(follow);
+
+        response.sendRedirect(request.getContextPath() + "/user/show?id=" + deletingUserId);
     }
     
 }
