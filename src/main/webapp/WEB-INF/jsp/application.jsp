@@ -18,26 +18,30 @@
 </head>
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
       <a href="${pageContext.request.contextPath}/index" class="navbar-brand h1">
         Basic Webapp
       </a>
 
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+        <li class="navbar-item">
           <a href="${pageContext.request.contextPath}/post/index" class="nav-link">投稿一覧</a>
         </li>
         <% if (session.getAttribute("user") != null) { %>
-        <li class="nav-item">
+        <li class="navbar-item">
           <a href="${pageContext.request.contextPath}/post/new" class="nav-link">投稿する</a>
         </li>
         <% } %>
       </ul>
 
       <% if (session.getAttribute("user") != null) { %>
-        <span class="navbar-text">
-          ${sessionScope.user.email}
-        </span>
+      <ul class="navbar-nav mr-3">
+        <li class="navbar-item">     
+          <span class="navbar-text">
+            ${sessionScope.user.username}
+          </span>
+        </li>
+      </ul>
       <% } %>
       
       <ul class="navbar-nav">
@@ -55,7 +59,7 @@
     </nav>
     
     <% if (request.getAttribute("alert") != null) { %>
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger mb-3" role="alert">
         <ul>
         <% for (String message : (List<String>)request.getAttribute("alert")) { %>
           <li><%= message %></li>
