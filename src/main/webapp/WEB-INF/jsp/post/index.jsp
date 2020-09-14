@@ -7,7 +7,12 @@
     <% for (PostModel post : (List<PostModel>)request.getAttribute("posts")) { %>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-          <h5 class="card-title"><%= post.getUser().getUsername() %></h5>
+          <h5 class="card-title">
+            <% request.setAttribute("user", post.getUser()); %>
+            <a href="${pageContext.request.contextPath}/user/show?id=${requestScope.user.id}">
+              ${requestScope.user.username}
+            </a>
+          </h5>
           <h6 class="card-subtitle mb-2 text-muted"><%= post.getCreatedAt().toString() %></h6>
           <p class="card-text"><%= post.getContent() %></p>
           <a href="#" class="card-link">Card link</a>
