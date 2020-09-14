@@ -16,12 +16,13 @@ public class FollowDAO extends DAO {
         List<UserModel> users = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(
-                "SELECT followed.id, followed.username FROM user" +
+                "SELECT follow.follower_user_id, followed.id, followed.username FROM user" +
                 "    INNER JOIN follow             ON user.id = follow.follower_user_id" +
                 "    INNER JOIN user AS followed   ON follow.followed_user_id = followed.id " +
-                "WHERE followed.id != ?"
+                "WHERE followed.id != ? AND follower_user_id = ?"
             );
             statement.setInt(1, followerUserId);
+            statement.setInt(2, followerUserId);
             ResultSet r = statement.executeQuery();
 
             while (r.next()) {
