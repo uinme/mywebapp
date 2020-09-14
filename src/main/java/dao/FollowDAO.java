@@ -58,6 +58,6 @@ public class FollowDAO extends DAO {
             e.printStackTrace();
         }
 
-        return 0;
+        return line;
     }
 }
